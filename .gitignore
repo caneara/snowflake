@@ -1,0 +1,10 @@
+build
+composer.lock
+vendor
+storage
+tests/World/database.sqlite
+.DS_Store
+coverage
+.phpunit.result.cache
+.idea
+.php_cs.cache

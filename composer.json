@@ -1,0 +1,45 @@
+{
+    "name": "mattkingshott/snowflake",
+    "description": "A package to create Twitter Snowflake identifiers",
+    "keywords": [
+        "snowflake",
+        "php",
+        "laravel",
+        "database"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/mattkingshott/snowflake",
+    "autoload": {
+        "psr-4": {
+            "Snowflake\\": "src"
+        },
+        "files": [
+            "src/Helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Snowflake\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "php": "^8.0",
+        "godruoyi/php-snowflake": "^2.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Snowflake\\ServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "minimum-stability": "stable"
+}

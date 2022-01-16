@@ -1,0 +1,43 @@
+name: tests
+
+on: [push, pull_request]
+
+jobs:
+    phpunit:
+        runs-on: ${{ matrix.os }}
+        strategy:
+            fail-fast: false
+            matrix:
+                os: [ubuntu-latest]
+                php: [8.1]
+                laravel: [8.*]
+                dependency-version: [prefer-stable]
+                include:
+                    -   laravel: 8.*
+                        testbench: 6.*
+
+        name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
+
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v2
+
+            -   name: Install SQLite
+                run: |
+                    sudo apt-get update
+                    sudo apt-get install sqlite3
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    extensions: curl, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, iconv
+                    coverage: none
+
+            -   name: Install dependencies
+                run: |
+                    composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+                    composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
+
+            -   name: Execute tests
+                run: vendor/bin/phpunit
