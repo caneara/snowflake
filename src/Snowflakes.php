@@ -12,7 +12,7 @@ trait Snowflakes
     {
         static::creating(function($model) {
             if (! $model->getKey()) {
-               $model->{$model->getKeyName()} = snowflake();
+                $model->{$model->getKeyName()} = snowflake();
             }
         });
     }
