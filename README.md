@@ -62,6 +62,8 @@ You can generate a Snowflake by resolving the service out of the container and c
 resolve('snowflake')->id(); // (string) "5585066784854016"
 ```
 
+> **WARNING**: Do not create instances of the Snowflake service, as doing so risks generating matching keys / introducing collisions. Instead, always resolve the Snowflake singleton out of the container. You can also use the global helper method (see below). 
+
 Since this is a little cumbersome, the package also registers a global `snowflake()` helper method that you can use anywhere.
 
 ```php
