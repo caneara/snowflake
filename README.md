@@ -62,11 +62,13 @@ You can generate a Snowflake by resolving the service out of the container and c
 resolve('snowflake')->id(); // (string) "5585066784854016"
 ```
 
-Since this is a little cumbersome, the package also registers a global `snowflake()` helper method that you can use anywhere. This helper also converts the Snowflake from a `string` into an `integer`, which better reflects its data type:
+Since this is a little cumbersome, the package also registers a global `snowflake()` helper method that you can use anywhere.
 
 ```php
-snowflake(); // (int) 5585066784854016
+snowflake(); // (string) "5585066784854016"
 ```
+
+> **IMPORTANT**: The initial release converted the Snowflake to an integer. This has been rolled back to prevent integer overflows in some languages.
 
 ### Eloquent models
 

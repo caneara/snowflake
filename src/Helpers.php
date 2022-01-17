@@ -4,7 +4,7 @@
  * Generate a new Snowflake identifier.
  *
  */
-function snowflake() : int
+function snowflake() : string
 {
-    return (int) resolve('snowflake')->id();
+    return resolve('snowflake')->id();
 }

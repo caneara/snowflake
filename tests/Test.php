@@ -29,8 +29,8 @@ class Test extends TestCase
     /** @test */
     public function it_can_generate_a_snowflake_identifier_using_the_global_helper() : void
     {
-        $this->assertTrue(is_int(snowflake()));
+        $this->assertTrue(is_string(snowflake()));
 
-        $this->assertEquals(16, strlen((string) snowflake()));
+        $this->assertEquals(16, strlen(snowflake()));
     }
 }
