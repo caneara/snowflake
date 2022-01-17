@@ -19,7 +19,7 @@ class SnowflakeCast implements CastsAttributes
      * Prepare the given value for storage.
      *
      */
-    public function set($model, string $key, $value, array $attributes) : mixed
+    public function set($model, string $key, $value, array $attributes) : int
     {
         return (int) $value;
     }
