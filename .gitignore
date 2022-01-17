@@ -8,4 +8,4 @@ coverage
 .phpunit.result.cache
 .idea
 .php_cs.cache
-.php_cs_fixer.cache
+.php-cs-fixer.cache
