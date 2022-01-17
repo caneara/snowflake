@@ -10,17 +10,17 @@ class SnowflakeCast implements CastsAttributes
      * Cast the given value.
      *
      */
-    public function get($model, string $key, $value, array $attributes) : string
+    public function get($model, string $key, $value, array $attributes) : mixed
     {
-        return (string) $value;
+        return filled($value) ? (string) $value : $value;
     }
 
     /**
      * Prepare the given value for storage.
      *
      */
-    public function set($model, string $key, $value, array $attributes) : int
+    public function set($model, string $key, $value, array $attributes) : mixed
     {
-        return (int) $value;
+        return filled($value) ? (int) $value : $value;
     }
 }
