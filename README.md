@@ -62,7 +62,7 @@ You can generate a Snowflake by resolving the service out of the container and c
 resolve('snowflake')->id(); // (string) "5585066784854016"
 ```
 
-> **WARNING**: Do not create instances of the Snowflake service, as doing so risks generating matching keys / introducing collisions. Instead, always resolve the Snowflake singleton out of the container. You can also use the global helper method (see below). 
+> **WARNING**: Do not create instances of the Snowflake service, as doing so risks generating matching keys / introducing collisions. Instead, always resolve the Snowflake singleton out of the container. You can also use the global helper method (see below).
 
 Since this is a little cumbersome, the package also registers a global `snowflake()` helper method that you can use anywhere.
 
@@ -114,6 +114,30 @@ use Snowflake\Snowflakes;
 class User extends Model
 {
     use Snowflakes;
+}
+```
+
+#### Optional casting
+
+The package also includes a custom `SnowflakeCast` that will automatically handle conversion from `string` to `integer` and vice-versa when storing or fetching a Snowflake from the database. If you wish, you may use this cast for any model attribute that will contain a Snowflake e.g.
+
+```php
+<?php
+
+namespace App\Models;
+
+use Snowflake\Snowflakes;
+use Snowflake\SnowflakeCast;
+
+class Post extends Model
+{
+    use Snowflakes;
+
+    protected $casts = [
+        'id'      => SnowflakeCast::class,
+        'user_id' => SnowflakeCast::class,
+        'title'   => 'string',
+    ];
 }
 ```
 
