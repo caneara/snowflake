@@ -3,8 +3,10 @@
 namespace Snowflake;
 
 use Godruoyi\Snowflake\Snowflake;
+use Illuminate\Database\Schema\Blueprint;
 use Godruoyi\Snowflake\RandomSequenceResolver;
 use Illuminate\Support\ServiceProvider as Provider;
+use Illuminate\Database\Schema\ForeignIdColumnDefinition;
 
 class ServiceProvider extends Provider
 {
@@ -14,6 +16,8 @@ class ServiceProvider extends Provider
      */
     public function boot() : void
     {
+        $this->macros();
+
         $this->publishes([__DIR__ . '/../config/snowflake.php' => config_path('snowflake.php')]);
     }
 
@@ -26,6 +30,30 @@ class ServiceProvider extends Provider
         $this->mergeConfigFrom(__DIR__ . '/../config/snowflake.php', 'snowflake');
 
         $this->app->singleton('snowflake', fn() => $this->singleton());
+    }
+
+    /**
+     * Register any custom macros.
+     *
+     */
+    protected function macros() : void
+    {
+        Blueprint::macro('snowflake', function($column = 'id') {
+            return $this->unsignedBigInteger($column);
+        });
+
+        Blueprint::macro('foreignSnowflake', function($column) {
+            return $this->addColumnDefinition(new ForeignIdColumnDefinition($this, [
+                'type'          => 'bigInteger',
+                'name'          => $column,
+                'autoIncrement' => false,
+                'unsigned'      => true,
+            ]));
+        });
+
+        Blueprint::macro('foreignSnowflakeFor', function($model, $column = null) {
+            return $this->foreignSnowflake($column ?: (new $model())->getForeignKey());
+        });
     }
 
     /**

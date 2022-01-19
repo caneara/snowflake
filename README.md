@@ -70,39 +70,42 @@ Since this is a little cumbersome, the package also registers a global `snowflak
 snowflake(); // (string) "5585066784854016"
 ```
 
-> **IMPORTANT**: The initial release converted the Snowflake to an integer. This has been rolled back to prevent integer overflows in some languages.
+## Databases
 
-### Eloquent models
+If you want to use Snowflakes in your database e.g. for primary and foreign keys, then you'll need to perform a couple of steps.
 
-If you want to use a Snowflake as the primary key for an Eloquent model, then you'll need to perform a couple of steps.
-
-First, modify the model's migration so that it no longer uses auto-incrementing integers e.g.
+First, modify your migrations so that they use the Snowflake migration methods e.g.
 
 ```php
 // Before
 $table->id();
+$table->foreignId('user_id');
+$table->foreignIdFor(User::class);
 
 // After
-$table->unsignedBigInteger('id')->primary();
+$table->snowflake()->primary();
+$table->foreignSnowflake('user_id');
+$table->foreignSnowflakeFor(User::class);
 ```
 
 Here's an example:
 
 ```php
-class CreateUsersTable extends Migration
+class CreatePostsTable extends Migration
 {
     public function up()
     {
-        Schema::create('users', function(Blueprint $table) {
-            $table->unsignedBigInteger('id')->primary();
-            $table->string('name', 100);
+        Schema::create('posts', function(Blueprint $table) {
+            $table->snowflake()->primary();
+            $table->foreignSnowflake('user_id')->constrained()->cascadeOnDelete();
+            $table->string('title', 100);
             $table->timestamps();
         });
     }
 }
 ```
 
-Finally, add the package's `Snowflakes` trait to the model:
+Next, if you're using Eloquent, add the package's `Snowflakes` trait to your Eloquent models:
 
 ```php
 <?php
@@ -111,15 +114,13 @@ namespace App\Models;
 
 use Snowflake\Snowflakes;
 
-class User extends Model
+class Post extends Model
 {
     use Snowflakes;
 }
 ```
 
-#### Optional casting
-
-The package also includes a custom `SnowflakeCast` that will automatically handle conversion from `string` to `integer` and vice-versa when storing or fetching a Snowflake from the database. If you wish, you may use this cast for any model attribute that will contain a Snowflake e.g.
+Finally, configure the model's `$casts` array to use the package's `SnowflakeCast` for all Snowflake attributes. This cast automatically handles conversion from `string` to `integer` and vice-versa when storing or fetching a Snowflake from the database. It also ensures that languages which do not support 64-bit integers (such as JavaScript), will not truncate the Snowflake.
 
 ```php
 <?php
