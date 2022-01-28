@@ -62,9 +62,11 @@ class ServiceProvider extends Provider
      */
     protected function singleton() : Snowflake
     {
+        $distributed = config('snowflake.distributed', true);
+
         $service = new Snowflake(
-            config('snowflake.data_center', 1),
-            config('snowflake.worker_node', 1)
+            $distributed ? config('snowflake.data_center', 1) : null,
+            $distributed ? config('snowflake.worker_node', 1) : null
         );
 
         $timestamp = strtotime(config('snowflake.start_timestamp', '2022-01-01')) * 1000;

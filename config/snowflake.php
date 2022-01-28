@@ -6,6 +6,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Distributed Architecture
+    |--------------------------------------------------------------------------
+    |
+    | This value determines whether Snowflakes should be generated with random
+    | data center and worker node values (see below). When set to false, the
+    | center and node values in this configuration file are ignored.
+    |
+    */
+
+    'distributed' => true,
+
+    /*
+    |--------------------------------------------------------------------------
     | Data Center
     |--------------------------------------------------------------------------
     |

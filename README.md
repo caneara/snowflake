@@ -39,20 +39,37 @@ composer require mattkingshott/snowflake
 
 ## Configuration
 
-Snowflake includes a configuration file that allows you to set:
-
-1. The data center number.
-2. The worker node number.
-3. The starting timestamp.
-4. The sequence resolver.
-
-Most developers won't need to alter these values unless they need to set up a distributed architecture for generating Snowflakes.
-
-If you want to change any of the values, publish the configuration file using Artisan:
+Snowflake includes a configuration file with several settings that you can use to initialize the Snowflake service. You should begin by publishing this configuration file:
 
 ```bash
 php artisan vendor:publish
 ```
+
+### Distributed architecture
+
+The service allows for the use of a distributed architectural setup involving data centers and worker nodes that are each responsible for generating Snowflakes according to their own designated identifiers. For maximum flexibility, as well as backward compatibility, this is the default configuration.
+
+If you do not intend to run a distributed architectural setup, then your first step should be to set the corresponding configuration value to `false`.
+
+### Data centers and worker nodes
+
+When using a distributed architectural setup, you'll need to set the data center and worker node that the application should use when generating Snowflakes. These are both set to `1` by default, as that is a good starting point, but you are free to increase these numbers as you add more centers and nodes.
+
+The maximums for each of these configuration values is `31`. This gives you up to 31 nodes per data center, and 31 data centers in total. Therefore, you can have up `961` worker nodes each generating unique Snowflakes.
+
+> If you have disabled distributed architecture, then you can skip the data center and worker node values as they will be ignored by the service.
+
+### Starting timestamp
+
+The service compares the Unix Epoch with the given starting timestamp as part of the process in generating a unique Snowflake. As a result, Snowflakes can be generated for up to 69 years using any given starting timestamp.
+
+In most cases, you should set this value to the current date using a format of `YYYY-MM-DD`.
+
+> Do not set the timestamp to a date in the future, as that won't achieve anything. You should also avoid using a date in the past, as that may reduce the number of years for which you can generate timestamps.
+
+### Sequence resolver
+
+In order to handle the generation of unique keys within the same millisecond, the service uses a sequence resolver. There are several to choose from, however they each have dependencies, such as Redis. You are free to use any of them, however the default option is a good choice, as it **doesn't** have any dependencies.
 
 ## Usage
 
