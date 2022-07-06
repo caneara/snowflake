@@ -37,6 +37,17 @@ Pull in the package using Composer:
 composer require mattkingshott/snowflake
 ```
 
+## Promo
+
+I made [Lumeno](https://lumeno.dev) to help you centralize your IT résumé, project portfolio and blog content. It aids in building a following, allows you to discover other creatives, and helps you to get invited for relevant job vacancies. Best of all, it's core feature set is free! [Get Started...](https://lumeno.dev)
+
+<!-- Screenshot -->
+<p align="center">
+    <a target="_blank" href="https://lumeno.dev">
+        <img src="resources/promotion.png" alt="Lumeno" style="height:350px">
+    </a>
+</p>
+
 ## Configuration
 
 Snowflake includes a configuration file with several settings that you can use to initialize the Snowflake service. You should begin by publishing this configuration file:
