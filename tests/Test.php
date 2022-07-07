@@ -23,7 +23,7 @@ class Test extends TestCase
     {
         $this->assertTrue(is_string(resolve('snowflake')->id()));
 
-        $this->assertEquals(16, strlen(resolve('snowflake')->id()));
+        $this->assertEquals(17, strlen(resolve('snowflake')->id()));
     }
 
     /** @test */
@@ -31,6 +31,6 @@ class Test extends TestCase
     {
         $this->assertTrue(is_string(snowflake()));
 
-        $this->assertEquals(16, strlen(snowflake()));
+        $this->assertEquals(17, strlen(snowflake()));
     }
 }
