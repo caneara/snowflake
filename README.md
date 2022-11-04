@@ -1,14 +1,3 @@
-<!-- Screenshot -->
-<p align="center">
-    <img src="resources/wallpaper.jpg" alt="Wallpaper">
-</p>
-
-<!-- Badges -->
-<p align="center">
-  <img src="resources/version.svg" alt="Version">
-  <img src="resources/license.svg" alt="License">
-</p>
-
 # Snowflake
 
 This package enables a Laravel application to create Twitter Snowflake identifiers. It is a very thin wrapper around the excellent [Snowflake PHP](https://github.com/godruoyi/php-snowflake) library created by Godruoyi.
@@ -34,7 +23,7 @@ I've written an [article](https://itnext.io/choosing-the-right-data-type-means-o
 Pull in the package using Composer:
 
 ```bash
-composer require mattkingshott/snowflake
+composer require caneara/snowflake
 ```
 
 ## Configuration
@@ -162,10 +151,6 @@ class Post extends Model
 ## Contributing
 
 Thank you for considering a contribution to Snowflake. You are welcome to submit a PR containing improvements, however if they are substantial in nature, please also be sure to include a test or tests.
-
-## Support the project
-
-If you'd like to support the development of Snowflake, then please consider [sponsoring me](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YBEHLHPF3GUVY&source=url). Thanks so much!
 
 ## License
 
