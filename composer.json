@@ -1,5 +1,5 @@
 {
-    "name": "mattkingshott/snowflake",
+    "name": "caneara/snowflake",
     "description": "A package to create Twitter Snowflake identifiers",
     "keywords": [
         "snowflake",
@@ -9,7 +9,7 @@
     ],
     "type": "library",
     "license": "MIT",
-    "homepage": "https://github.com/mattkingshott/snowflake",
+    "homepage": "https://github.com/caneara/snowflake",
     "autoload": {
         "psr-4": {
             "Snowflake\\": "src"
