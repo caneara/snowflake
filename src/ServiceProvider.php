@@ -29,7 +29,7 @@ class ServiceProvider extends Provider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/snowflake.php', 'snowflake');
 
-        $this->app->singleton('snowflake', fn() => $this->singleton());
+        $this->app->singleton('snowflake', fn () => $this->singleton());
     }
 
     /**
