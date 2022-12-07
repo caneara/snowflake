@@ -10,8 +10,8 @@ Snowflakes are a form of unique identifier devised by Twitter. In this respect, 
 
 I've written an [article](https://itnext.io/choosing-the-right-data-type-means-of-generating-unique-primary-keys-d7aac92968c6) exploring the benefits of Snowflakes over other unique identifiers. However, in short:
 
-- They consists entirely of integers.
-- They uses less space (16 characters, so it fits in a `BIGINT`).
+- They consist entirely of integers.
+- They use less space (16 characters, so it fits in a `BIGINT`).
 - Indexing of integers is much faster than indexing a string.
 - Keys begin with a timestamp, so are sortable.
 - Keys end with a random number, so guessing table size is not possible.
