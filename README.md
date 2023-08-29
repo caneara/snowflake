@@ -8,7 +8,7 @@ Snowflakes are a form of unique identifier devised by Twitter. In this respect, 
 
 ## Why should I use them?
 
-I've written an [article](https://itnext.io/choosing-the-right-data-type-means-of-generating-unique-primary-keys-d7aac92968c6) exploring the benefits of Snowflakes over other unique identifiers. However, in short:
+Some of the benefits of using Snowflakes (over alternatives such as UUID) include:
 
 - They consist entirely of integers.
 - They use less space (16 characters, so it fits in a `BIGINT`).
