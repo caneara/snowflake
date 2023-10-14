@@ -54,6 +54,18 @@ class ServiceProvider extends Provider
         Blueprint::macro('foreignSnowflakeFor', function($model, $column = null) {
             return $this->foreignSnowflake($column ?: (new $model())->getForeignKey());
         });
+
+        Blueprint::macro('snowflakeMorphs', function ($name, $indexName = null) {
+            $this->string("{$name}_type");
+            $this->unsignedBigInteger("{$name}_id");
+            $this->index(["{$name}_type", "{$name}_id"], $indexName);
+        });
+
+        Blueprint::macro('nullableSnowflakeMorphs', function ($name, $indexName = null) {
+            $this->string("{$name}_type")->nullable();
+            $this->unsignedBigInteger("{$name}_id")->nullable();
+            $this->index(["{$name}_type", "{$name}_id"], $indexName);
+        });
     }
 
     /**
